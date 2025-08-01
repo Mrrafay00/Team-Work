@@ -1,0 +1,293 @@
+/* --- Global Variables & Base Styles --- */
+:root {
+    /* Updated Color Palette */
+    --primary-green: #28a745; /* Vibrant Green for accents/interactive elements */
+    --accent-yellow: #ffc107; /* The main yellow, but can be used for accents if body is yellow */
+    --text-dark: #212529;     /* Near-black for main text on light backgrounds */
+    --text-light: #495057;    /* Dark gray for secondary text */
+    --card-background: #ffffff; /* White for card backgrounds to contrast yellow */
+    --border-color: #dee2e6;  /* Light gray for subtle borders */
+    --shadow-light: rgba(0, 0, 0, 0.1); /* Soft shadow */
+    --shadow-medium: rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+    --social-icon-color: #6c757d; /* Gray for default social icons */
+    --social-icon-hover: #28a745; /* Green on hover for social icons */
+    --red-alert: #dc3545; /* Red for potential error/warning (not used prominently here but available) */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark); /* Dark text for readability on yellow background */
+    background-color: var(--accent-yellow); /* Fixed yellow background as requested */
+    background-attachment: fixed; /* Ensures the background doesn't scroll with content */
+    min-height: 100vh; /* Ensures the background covers the full viewport height */
+    display: flex;
+    flex-direction: column; /* Allows header and section to stack */
+    align-items: center; /* Center content horizontally */
+    padding: 40px 20px; /* Overall page padding */
+}
+
+/* --- Header Section --- */
+.page-header {
+    text-align: center;
+    margin-bottom: 60px; /* Space below header */
+    max-width: 800px;
+    width: 100%;
+}
+
+.page-header h1 {
+    font-size: 3.5em;
+    color: var(--primary-green); /* Green title */
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px var(--shadow-light); /* Slight text shadow for depth */
+}
+
+.page-header p {
+    font-size: 1.4em;
+    color: var(--text-light); /* Darker gray for subtitle */
+    opacity: 0.9;
+}
+
+/* --- Team Section (Grid Container) --- */
+.team-section {
+    display: grid;
+    /* Default for Desktop & PC: 3 columns */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; /* Space between cards */
+    max-width: 1200px; /* Max width for the team grid */
+    width: 100%;
+    margin-bottom: 50px; /* Space above scroll-to-top button */
+}
+
+/* --- Team Member Card --- */
+.team-member-card {
+    background-color: var(--card-background); /* White card background */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--shadow-light); /* Soft shadow */
+    padding: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover */
+}
+
+.team-member-card:hover {
+    transform: translateY(-8px) scale(1.02); /* Lift and slightly scale on hover */
+    box-shadow: 0 12px 25px var(--shadow-medium); /* Deeper shadow on hover */
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover; /* Ensures image covers area without distortion */
+    border: 4px solid var(--primary-green); /* Green border around pic */
+    margin-bottom: 25px;
+    box-shadow: 0 0 0 5px rgba(40, 167, 69, 0.1); /* Subtle glow effect */
+}
+
+.team-member-card h3 {
+    font-size: 1.8em;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.team-member-card .job-role {
+    font-size: 1.1em;
+    color: var(--primary-green); /* Green job role */
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.team-member-card .description {
+    font-size: 1em;
+    color: var(--text-light); /* Dark gray description */
+    margin-bottom: 25px;
+    font-style: italic;
+    max-width: 250px; /* Constrain description width */
+}
+
+.social-links {
+    display: flex;
+    gap: 15px; /* Space between icons */
+}
+
+.social-links a {
+    color: var(--social-icon-color); /* Default gray icon color */
+    font-size: 1.8em;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-links a:hover {
+    color: var(--social-icon-hover); /* Green on hover */
+    transform: translateY(-3px); /* Lift icon on hover */
+}
+
+/* --- Scroll-to-Top Button --- */
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--primary-green); /* Green button */
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    font-size: 1.6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px var(--shadow-medium);
+    transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0; /* Hidden by default */
+    visibility: hidden; /* Hidden for accessibility until shown */
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.scroll-to-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: translateY(-3px);
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+/* Laptops & Desktops (1200px and up are covered by base styles)
+ * Adjustments for slightly smaller desktops/large laptops if necessary.
+ * `minmax(280px, 1fr)` ensures cards don't get too small before stacking.
+ */
+@media (max-width: 1200px) {
+    .page-header h1 {
+        font-size: 3em;
+    }
+    .page-header p {
+        font-size: 1.2em;
+    }
+    .team-section {
+        max-width: 960px; /* Constrain grid width for smaller desktops */
+    }
+    /* Grid already handles 3 columns well with minmax(280px, 1fr) for 960px */
+}
+
+/* Tablets (Portrait & Landscape) and smaller Laptops (e.g., up to 992px) */
+@media (max-width: 992px) {
+    .page-header h1 {
+        font-size: 2.8em;
+    }
+    .page-header p {
+        font-size: 1.1em;
+    }
+    .team-section {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Force 2 columns when cards are wider */
+        max-width: 650px; /* Max width for 2-column layout */
+        padding: 0 15px; /* Add some horizontal padding */
+    }
+    body {
+        padding: 30px 15px; /* Adjust overall padding */
+    }
+}
+
+/* Mobile Devices (Smartphones - Landscape & Portrait, Small Tablets - e.g., up to 768px) */
+@media (max-width: 768px) {
+    .page-header {
+        margin-bottom: 40px;
+    }
+    .page-header h1 {
+        font-size: 2.2em; /* Smaller title for mobile */
+    }
+    .page-header p {
+        font-size: 1em;
+    }
+    .team-section {
+        grid-template-columns: 1fr; /* **Stacks cards into a single column** */
+        max-width: 350px; /* Constrain width for a clean single column */
+        gap: 25px; /* Slightly less gap for mobile */
+    }
+    .team-member-card {
+        padding: 25px; /* Reduce card padding */
+    }
+    .profile-pic {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 20px;
+    }
+    .team-member-card h3 {
+        font-size: 1.6em;
+    }
+    .team-member-card .job-role {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+    .team-member-card .description {
+        font-size: 0.95em;
+        margin-bottom: 20px;
+    }
+    .social-links a {
+        font-size: 1.6em;
+    }
+    .scroll-to-top-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4em;
+        bottom: 20px;
+        right: 20px;
+    }
+    body {
+        padding: 20px 10px; /* Further reduce overall padding */
+    }
+}
+
+/* Smaller Smartphones (e.g., up to 480px or less) */
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 1.8em;
+    }
+    .page-header p {
+        font-size: 0.9em;
+    }
+    .team-member-card {
+        padding: 20px;
+    }
+    .profile-pic {
+        width: 100px;
+        height: 100px;
+    }
+    .team-member-card h3 {
+        font-size: 1.4em;
+    }
+    .team-member-card .job-role {
+        font-size: 0.9em;
+    }
+    .team-member-card .description {
+        font-size: 0.9em;
+    }
+}
+
+/* General PC/Desktop range (explicitly setting if you want to override a mobile-first base)
+ * This is usually covered by base styles but can be explicitly set if needed.
+ */
+@media (min-width: 1201px) {
+    /* Styles specifically for very large screens if they need unique adjustments */
+    /* .page-header {
+        margin-bottom: 80px;
+    }
+    .team-section {
+        grid-template-columns: repeat(4, 1fr); // Can set to 4 columns specifically for large PCs
+        max-width: 1400px;
+    } */
+}
